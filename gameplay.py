@@ -58,6 +58,7 @@ class Game:
             self.food.hideturtle()      # hides the food object as a visual
             self.screen.update()        # update hiding the food
             self.scoreboard.display_game_over()     # displays game over and final score
+            self.scoreboard.update_high_score()     # updates the all-time high score stored in a text file
             return True
         return False
 

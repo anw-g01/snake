@@ -166,6 +166,8 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.color("white")
         self.score = 0  # how many foods eaten
+        with open("high_score.txt") as file:
+            self.high_score = int(file.read())
 
     def reset_score(self):
         """Resets the score back to zero."""
@@ -187,10 +189,42 @@ class Scoreboard(Turtle):
         self.clear()
         self.goto(0, SCREEN_HEIGHT / 2 - 40)
         self.write(
-            f"SCORE: {self.score}",
+            f"YOUR SCORE: {self.score} (HIGH SCORE: {self.high_score})",
             align="center",
             font=FONT,
         )
+
+    def display_high_score(self, new=False):
+        """Displays the all-time high score value when the game is over. Also displays if it is a new high score."""
+        self.goto(0, SCREEN_HEIGHT / 2 - 80)
+        if new:
+            self.write(
+                f"NEW HIGH SCORE: {self.high_score}",
+                align="center",
+                font=FONT,
+            )
+        else:
+            self.write(
+                f"ALL-TIME HIGH SCORE: {self.high_score}",
+                align="center",
+                font=FONT,
+            )
+
+    def update_high_score(self):
+        """Updates and stores the all-time high-score in a text file."""
+        if self.score > self.high_score:
+            with open("high_score.txt", mode="w") as file:
+                file.write(str(self.score))
+                self.high_score = self.score
+            self.display_high_score(new=True)   # display a new high score
+        else:
+            self.display_high_score()   # display the all-time standing high score
+
+    def reset_high_score(self):
+        """Resets the all-time high score back to 0."""
+        with open("high_score.txt", "w") as file:
+            file.write("0")
+            self.high_score = int(file.read())
 
     def display_game_over(self):
         """Displays a game over message and presents the final achieved score value."""
@@ -207,3 +241,5 @@ class Scoreboard(Turtle):
             align="center",
             font=FONT
        )
+
+

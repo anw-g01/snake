@@ -7,6 +7,7 @@ A classic arcade game built in Python using the Turtle graphics library.
 2. `config.py`: Stores configuration parameters (global variables) for the game, allowing custimisation across nearly every aspect.
 3. `gameplay.py`: Manages the main game logic by handling wall and segment collision as well as the snake eating food.
 4. `classes.py`: Contains definitions of classes to represent the snake, body segments, food and the scoreboard.
+5. `high_score.txt`: Text file that stores the all-time high score for the game to keep track in memory.
 
 # How to play
 1. Run `main.py` to start the program.
